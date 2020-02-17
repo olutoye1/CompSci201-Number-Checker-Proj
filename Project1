@@ -1,0 +1,214 @@
+# File: proj1.py
+# Author: Olutoye Sekiteri
+# Date: 3/17/17
+# Section: 23
+# E-mail: olutoye1@umbc.edu
+# Description: This code takes a range of numbers between 1-100000 and classfiys if each number is Odd or Even, Prime Composite or Neither, Perfect Deficient or Abundant, Sqaure, and Trian\
+#              gular
+
+
+MIN = 1
+MAX = 100000
+
+# printGreeting() explains the program to the user
+# Input:          none
+# Output:         none (prints greeting)
+def printGreeting():
+    print("This program classifies positive integers as")
+    print("Odd/Even, Prime/Composite, Perfect/Abundant/Deficient,")
+    print("Square, and Triangular")
+
+    print("You will now get to choose the range of positive integers that")
+    print("you would like to see classified.")
+
+# getValidInt() reprompts the user until they enter a number
+#               between a minimum and maximum (inclusive)
+# Input:        minn;   integer of lower accepted range
+#               maxx;   integer of upper accepted range
+# Output:       userInput1; integer that is used as start of range
+#               userInput2; integer that is used as end of range
+def getValidInt(minn,maxx):
+    userInput1 = 0
+    userInput2 = 0
+
+    print("Start with which positive integer?")
+    while userInput1 < minn or userInput1 > maxx:
+        userInput1=int(input("Enter a number between 1 and 100000 (inclusive): "))
+        if userInput1 < minn or userInput1 > maxx:
+            print("That number is not allowed. Please try again!")
+
+    print("End with which positive integer?")
+    while userInput2 < minn or userInput2 > maxx or userInput2 < userInput1:
+        userInput2=int(input("Enter a number between "+str(userInput1)+" and 100000 (inclusive): \
+"))
+        if userInput2 < minn or userInput2 > maxx or userInput2 < userInput1:
+            print("That number is not allowed. Please try again!")
+
+    return userInput1, userInput2
+
+# isOdd() calculates whether num is odd or not
+# Input:  num;      an integer we're checking for oddness
+# Output: oddEven; a Boolean that says if num is odd
+#                   (returns True if odd, False if even)
+def isOdd(num):
+
+    if num % 2 == 0:
+        return False
+    else:
+        return True
+
+    return booll
+
+
+
+# isPrime() calculate where num is prime or composite
+# Input:    num;      an integer were checking for primness
+# Output:   primeComp; a boolean that say if num is prime or composite
+def isPrime(num):
+    for i in range(2,num):
+        if num % i == 0 :
+            return False
+    return True
+
+    if num == 1:
+        return True
+    if num == 2:
+        return True
+
+# isTriangular() calculates where num is triangular or not
+# Input:         num;       an integer were checking for Triangularness
+# Output:        tri; a boolean that says if num is triangular or
+#                                 not
+def isTriangular(num):
+    triAdd = 0
+    count = 1
+    while num >= triAdd and triAdd != num:
+        triAdd = triAdd + count
+        count = count + 1
+    if triAdd == num:
+        return True
+    else:
+        return False
+
+# isSquare() calculate whether num is square or not
+# Input:     num;      an integer were checking for squarness
+# Output     squ; a boolean that say if num is square or not
+def isSqaure(num):
+    squareAdd = 1
+    count = 3
+    while num > squareAdd and squareAdd != num:
+        squareAdd = squareAdd + count
+        count = count + 2
+
+    if squareAdd == num:
+        return True
+    else:
+        return False
+# printTableLine() Prints the information for one number on one line
+#                  of the table.
+# Input:  num;     the integer we are checking the classifications for
+#         odd;     a boolean that says if a odd or even
+#         prime;   a boolean that tell if int is prime or composite
+#         pda;     a string that spells out perfect,deficient,abundant
+#         square;  a boolean that tells whether the number is square or not
+#         tri;     a boolean that tells whether the number is trangular
+# Output:          a line of the outcome of the classification checks
+def printTableLine(num,odd,prime,tri,square,pda):
+    oddStr=""
+    primrStr=""
+    triStr=""
+    sqaureStr=""
+
+    if odd == True:
+        oddStr = "Odd"
+    else:
+        oddStr = "Even"
+
+    if prime == True:
+        primeStr = "Prime"
+    else:
+        primeStr = "Composite"
+    if num == 1:
+         primeStr = "Neither"
+
+    if tri == True:
+        triStr ="Triangular"
+    else:
+        triStr = "\t"
+
+    if square == True:
+        squareStr = "Square"
+    else:
+        squareStr = "\t "
+
+    if primeStr == "Composite":
+        print(str(num),"\t",oddStr,"\t",primeStr,"    ",pda,"\t", squareStr,"\t",triStr)
+    if primeStr == "Prime":
+        print(str(num),"\t",oddStr,"\t",primeStr,"\t       ",pda,"\t", squareStr,"\t",triStr)
+    if primeStr == "Neither":
+        print(str(num),"\t",oddStr,"\t",primeStr,"      ",pda,"\t", squareStr,"\t",triStr)
+
+# sumDivisors() returns the sum of the divisors of the num
+# Input: num;   the integer we are checking the classifications for
+# Output:       a int which is the sum of all the divisors of num
+def sumDivisors(num):
+    div = []
+    total = 0
+    for i in range(1,num+1):
+        if num % i == 0:
+            div.append(i)
+
+    for i in range(0,len(div)-1):
+        total = total + div[i]
+    return total
+
+# checkIfPerfect() calculates wheter num is perfect abundant or deficient
+# Input:           num; an nteger we are checking perfectness
+#                  sumDivi; the sum of all the divisors of num
+# Output:          a string the coresponds to the perfect, defiecient, or abund\
+#                  ant
+def checkIfPerfect(num,sumDivi):
+    status = ""
+    if sumDivi == num:
+        status = "Perfect"
+    if sumDivi > num:
+        status = "Abundant"
+    if sumDivi < num:
+        status = "Deficient"
+
+    return status
+
+# printTableHead() prints heading of the table
+# Input:           none
+# Output:          heading
+def printTableHead():
+    print("Int      Classifications---------------------------------------------------")
+    print("---------------------------------------------------------------------------")
+
+def main():
+    #prints out greeting
+    printGreeting()
+    #Asks user for range to classify
+    start,end = getValidInt(MIN,MAX)
+    #Print tablehead out
+    printTableHead()
+
+   #While current number is less the end number run code
+    while start <= end:
+        # get if the current number is odd, prime, perfect, square, or
+        # triangular
+
+        oddEven = isOdd(start)
+        primeComp = isPrime(start)
+        tri = isTriangular(start)
+        squ = isSqaure(start)
+        sumDiv = sumDivisors(start)
+        perDefAbu = checkIfPerfect(start,sumDiv)
+
+        #prints line of information
+        printTableLine(start, oddEven, primeComp, tri, squ,perDefAbu)
+        #Add one to the cureent number in order to get next value
+        start = start + 1
+
+main()
+
